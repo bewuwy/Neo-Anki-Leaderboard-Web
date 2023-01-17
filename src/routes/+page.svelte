@@ -6,7 +6,7 @@
 </script>
 
 <hgroup>
-    <h1 class="text-red-500 w-full font-bold text-2xl">Neo Anki Leaderboard</h1>
+    <h1>Neo Anki Leaderboard</h1>
     
     <nav>
         <ul>
@@ -23,7 +23,8 @@
           </li>
         </ul>
         <ul>
-            <a href="register" role="button" class="outline">Register</a>
+            <li><a href='login' role="button" class="outline">{ data.loggedIn? "Logout": "Login" }</a></li>
+            <li><a href={ data.loggedIn? "profile": "register" } role="button" class="outline">{ data.loggedIn? "Profile": "Register" }</a></li>
         </ul>
     </nav>
 </hgroup>
@@ -40,9 +41,9 @@
     <tbody>
         {#each data.leaderboard as record, i}
             <tr>
-                <td>{i+1}.</td>
-                <td>{record.username}</td>
-                <td>{record.score}</td>
+                <td>{#if record.username === data.user?.username}<b>{i+1}.</b>{:else}{i+1}{/if}</td>
+                <td>{#if record.username === data.user?.username}<b><u>{record.username}</u></b>{:else}{record.username}{/if}  </td>
+                <td>{#if record.username === data.user?.username}<b>{record.score}</b>{:else}{record.score}{/if}</td>
             </tr>
         {/each}
     </tbody>

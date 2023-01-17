@@ -6,6 +6,8 @@ import { PUBLIC_PB_URL } from '$env/static/public';
 export async function load() { // { params }: any
     const pb = new PocketBase(PUBLIC_PB_URL);
 
+    const loggedIn = pb.authStore.isValid;
+
     const filter = `updated >= "${new Date().toISOString().split('T')[0]} 00:00:00" && reviews > 0`; // "2021-12-31 00:00:00"
     const records = await pb.collection('today_leaderboard').getFullList(200 /* batch size */, {
         sort: '-reviews',
@@ -15,9 +17,11 @@ export async function load() { // { params }: any
 
     const leaderboard = [];
 
+    let user: any;
+
     for (let i = 0; i < records.length; i++) {
         const record = records[i];
-        const user: any = record.expand.user;
+        user = record.expand.user;
         const username = user.username;
 
         const score = record.reviews || 0;
@@ -28,7 +32,11 @@ export async function load() { // { params }: any
         });
     }
 
+    user = pb.authStore.model || null;
+
     return {
-      leaderboard
+      leaderboard,
+      user,
+      loggedIn
     };
 }

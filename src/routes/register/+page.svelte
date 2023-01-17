@@ -1,22 +1,9 @@
-<title>Register | Neo Anki Leaderboard</title>
-
-<hgroup>
-    <h1 class="text-red-500 w-full font-bold text-2xl">Neo Anki Leaderboard</h1>
-    <!-- <h2>Register</h2> -->
-
-    <nav>
-        <ul>
-          <li><strong>Register</strong></li>
-        </ul>
-        <ul>
-            <a href="/" role="button" class="outline">Leaderboard</a>
-        </ul>
-    </nav>
-</hgroup>
-
 <script>
-    import PocketBase, { ClientResponseError } from 'pocketbase';
-    import { PUBLIC_PB_URL } from '$env/static/public'
+    import PocketBase from 'pocketbase';
+    import { PUBLIC_PB_URL } from '$env/static/public';
+
+    // @ts-ignore
+    import Nav from '$lib/Nav.svelte';
 
     /**
 	 * @type {{ valid: any; }}
@@ -69,6 +56,9 @@
             };
         }
 
+        // @ts-ignore
+        pb.collection("users").authWithPassword(email, password);
+
         // POST /api/CreateUser
         const res = await fetch('/api/createUser', {
             method: 'POST',
@@ -91,6 +81,8 @@
         return;
     }
 </script>
+
+<Nav subtitle="Register"/>
 
 <form method="POST" on:submit|preventDefault={handleRegister}>
     <label for="username">
