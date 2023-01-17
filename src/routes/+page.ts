@@ -6,10 +6,10 @@ import { PUBLIC_PB_URL } from '$env/static/public';
 export async function load() { // { params }: any
     const pb = new PocketBase(PUBLIC_PB_URL);
 
-    const todayFilter = `updated >= "${new Date().toISOString().split('T')[0]} 00:00:00"`; // "2021-12-31 00:00:00"
+    const filter = `updated >= "${new Date().toISOString().split('T')[0]} 00:00:00" && reviews > 0`; // "2021-12-31 00:00:00"
     const records = await pb.collection('today_leaderboard').getFullList(200 /* batch size */, {
         sort: '-reviews',
-        filter: todayFilter,
+        filter: filter,
         expand: 'user'
     });
 
