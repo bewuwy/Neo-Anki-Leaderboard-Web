@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@picocss/pico': ^1.5.6
   '@sveltejs/adapter-auto': ^1.0.0
   '@sveltejs/kit': ^1.0.0
   '@typescript-eslint/eslint-plugin': ^5.45.0
@@ -18,6 +19,7 @@ specifiers:
   vite: ^4.0.0
 
 dependencies:
+  '@picocss/pico': 1.5.6
   pocketbase: 0.10.0
 
 devDependencies:
@@ -309,6 +311,10 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
     dev: true
+
+  /@picocss/pico/1.5.6:
+    resolution: {integrity: sha512-9R+OdtMuHijKa7AQKBrng/1Q/Cd3BnEigYJXmOxI10Eka2qGGDa4b0hua8UeYu01BTtAiO70K7CQuHffU4YXGA==}
+    dev: false
 
   /@polka/url/1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}

@@ -1,19 +1,37 @@
+<title>Today | NeoAnkiLeaderboard</title>
+
 <script>
     /** @type {import('./$types').PageData} */
     export let data;
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-
+<hgroup>
+    <h1 class="text-red-500 w-full font-bold text-2xl">Neo Anki Leaderboard</h1>
+    
+    <nav>
+        <ul>
+          <li><strong>Leaderboard</strong></li>
+          <li>
+            <details role="list" dir="rtl">
+              <summary aria-haspopup="listbox" role="link">Today</summary>
+              <ul role="listbox">
+                <li><a href="/week">Week</a></li>
+                <li><a href="/month">Month</a></li>
+                <li><a href="/all">All time</a></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+    </nav>
+</hgroup>
 
 <!-- create table from leaderboad -->
-<table>
+<table role="grid">
     <thead>
         <tr>
-            <th>place</th>
-            <th>name</th>
-            <th>reviews</th>
+            <th>#</th>
+            <th>Name</th>
+            <th>Reviews</th>
         </tr>
     </thead>
     <tbody>
