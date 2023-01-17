@@ -1,10 +1,11 @@
 import PocketBase from 'pocketbase';
+import { PUBLIC_PB_URL } from '$env/static/public'
 
 
 /** @type {import('./$types').PageLoad} */
 export async function load() { // { params }: any
 
-    const pb = new PocketBase("https://pb-anki-lb.fly.dev/");
+    const pb = new PocketBase(PUBLIC_PB_URL);
 
     const todayFilter = `updated >= "${new Date().toISOString().split('T')[0]} 00:00:00"`; // "2021-12-31 00:00:00"
     const records = await pb.collection('today_leaderboard').getFullList(200 /* batch size */, {
