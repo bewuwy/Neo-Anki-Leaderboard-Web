@@ -1,4 +1,4 @@
-<title>Today | NeoAnkiLeaderboard</title>
+<title>Today | Neo Anki Leaderboard</title>
 
 <script>
     /** @type {import('./$types').PageData} */
@@ -21,6 +21,9 @@
               </ul>
             </details>
           </li>
+        </ul>
+        <ul>
+            <a href="register" role="button" class="outline">Register</a>
         </ul>
     </nav>
 </hgroup>

@@ -2,8 +2,4 @@
     "cSpell.words": [
         "leaderboard"
     ],
-
-    "terminal.integrated.env.windows": {
-        "PUBLIC_PB_URL": "https://pb-anki-lb.fly.dev/",
-    },
 }
