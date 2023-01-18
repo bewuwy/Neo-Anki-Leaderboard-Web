@@ -7,6 +7,8 @@
     export let heatmap_data: any;
     export let your: boolean = true;
 
+    const createdDate = new Date(user?.created).toLocaleDateString();
+
     const year_start = new Date();
     year_start.setMonth(0);
     year_start.setDate(1);
@@ -42,6 +44,7 @@
         <details>
             <summary>More info</summary>
             <ul>
+                <li>account created: {createdDate}</li>
                 <li>user id: {user?.id}</li>
                 <li>verified e-mail: {user?.verified}</li>
             </ul>
