@@ -14,6 +14,7 @@ specifiers:
   prettier-plugin-svelte: ^2.8.1
   svelte: ^3.54.0
   svelte-check: ^3.0.1
+  svelte-heatmap: ^1.0.2
   tslib: ^2.4.1
   typescript: ^4.9.3
   vite: ^4.0.0
@@ -21,6 +22,7 @@ specifiers:
 dependencies:
   '@picocss/pico': 1.5.6
   pocketbase: 0.10.0
+  svelte-heatmap: 1.0.2
 
 devDependencies:
   '@sveltejs/adapter-auto': 1.0.0_@sveltejs+kit@1.1.0
@@ -1566,6 +1568,10 @@ packages:
       - stylus
       - sugarss
     dev: true
+
+  /svelte-heatmap/1.0.2:
+    resolution: {integrity: sha512-qVsJj/Y/FQCjYJ2A7QU/v87FjGFjWqrTIb+qPumrudzH5w6D5WoubHF7Q2g38naJry4ADO1I0K29UuC86t5lJw==}
+    dev: false
 
   /svelte-hmr/0.15.1_svelte@3.55.1:
     resolution: {integrity: sha512-BiKB4RZ8YSwRKCNVdNxK/GfY+r4Kjgp9jCLEy0DuqAKfmQtpL38cQK3afdpjw4sqSs4PLi3jIPJIFp259NkZtA==}
