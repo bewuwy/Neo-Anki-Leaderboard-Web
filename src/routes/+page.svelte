@@ -42,7 +42,7 @@
         {#each data.leaderboard as record, i}
             <tr>
                 <td>{#if record.username === data.user?.username}<b>{i+1}.</b>{:else}{i+1}{/if}</td>
-                <td>{#if record.username === data.user?.username}<b><u>{record.username}</u></b>{:else}{record.username}{/if}  </td>
+                <td>{#if record.username === data.user?.username}<b><u><a style="color: hsl(205deg, 16%, 77%);" href={ "/user/" + record.user_id }>{record.username}</a></u></b>{:else}{record.username}{/if}  </td>
                 <td>{#if record.username === data.user?.username}<b>{record.score}</b>{:else}{record.score}{/if}</td>
             </tr>
         {/each}

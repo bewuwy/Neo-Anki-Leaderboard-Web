@@ -23,11 +23,13 @@ export async function load() { // { params }: any
         const record = records[i];
         user = record.expand.user;
         const username = user.username;
+        const user_id = user.id;
 
         const score = record.reviews || 0;
 
         leaderboard.push({
             username,
+            user_id,
             score,
         });
     }
