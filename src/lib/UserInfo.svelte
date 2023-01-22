@@ -26,6 +26,21 @@
     half_year_start.setDate(1);
 </script>
 
+<style>
+    #heatmap-desktop {
+        display: none;
+    }
+
+    @media (min-width: 768px) {
+        #heatmap-mobile {
+            display: none;
+        }
+        #heatmap-desktop {
+            display: block;
+        }
+    }
+</style>
+
 <!-- user data -->
 <article aria-busy={user?.username === undefined}>
 
@@ -54,7 +69,8 @@
     {/if}
 </article>
 
-<article aria-busy={heatmap_data === undefined}>
+<!-- heatmap -->
+<article aria-busy={heatmap_data === undefined} id="heatmap-desktop">
     
     {#if heatmap_data != undefined}
         <h3>{ your? "Your": user.name + "'s" } review heatmap</h3>
@@ -94,6 +110,38 @@
             fontColor={'white'}
             fontSize={16}
         />
+    {:else}
+    Loading heatmap data
+    {/if}
+</article>
+
+<!-- mobile heatmap -->
+<article aria-busy={heatmap_data === undefined} id="heatmap-mobile">
+
+    {#if heatmap_data != undefined}
+        <h3>{ your? "Your": user.name + "'s" } review heatmap</h3>
+        
+            <!-- iterate from start_date every n months -->
+            {#each Array.from({length: 4}, (_, i) => new Date(year_start.getFullYear(), year_start.getMonth() + i * 3)) as month}
+                <section>
+                <SvelteHeatmap
+                        allowOverflow={true}
+                        cellGap={5}
+                        cellRadius={1}
+                        colors={['#a1dab4', '#42b6c4', '#2c7fb9', '#263494']}
+                        data={heatmap_data}
+                        dayLabelWidth={20}
+                        emptyColor={'#ecedf0'}
+                        monthGap={20}
+                        monthLabelHeight={25}
+                        startDate={month}
+                        endDate={new Date(month.getFullYear(), month.getMonth() + 2)}
+                        view={'monthly'}
+                        fontColor={'white'}
+                        fontSize={16}
+                    />
+                </section>
+            {/each}
     {:else}
     Loading heatmap data
     {/if}
