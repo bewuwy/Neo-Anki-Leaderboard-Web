@@ -17,6 +17,13 @@
 	 * @type {boolean}
 	 */
     let success;
+    $: {
+        if (success) {
+            setTimeout(() => {
+                window.location.href = "/";
+            }, 1000);
+        }
+    }
 
     /**
 	 * @param {Event} event
