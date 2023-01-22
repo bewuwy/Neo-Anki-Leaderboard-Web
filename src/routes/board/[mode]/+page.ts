@@ -23,6 +23,10 @@ export async function load({params}: any) {
     date_start_month.setHours(0, 0, 0, 0);
 
     switch (lb_mode) {
+        case 'today':
+            filter = `updated >= "${new Date().toISOString().split('T')[0]} 00:00:00" && reviews > 0`; // "2021-12-31 00:00:00"
+            collection = 'today_leaderboard';
+            break;
         case 'week':
             filter = `updated >= "${date_start_week.toISOString().split('T')[0]} 00:00:00" && reviews > 0`; // "2021-12-31 00:00:00"
             collection = 'week_leaderboard';
