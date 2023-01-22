@@ -80,7 +80,7 @@
                 allowOverflow={true}
                 cellGap={5}
                 cellRadius={1}
-                colors={['#a1dab4', '#42b6c4', '#2c7fb9', '#263494']}
+                colors={['#c6e48b', '#7bc96f', '#239a3b', '#196127'].reverse()}
                 data={heatmap_data}
                 dayLabelWidth={20}
                 emptyColor={'#ecedf0'}
@@ -98,7 +98,7 @@
             allowOverflow={true}
             cellGap={5}
             cellRadius={1}
-            colors={['#a1dab4', '#42b6c4', '#2c7fb9', '#263494']}
+            colors={['#c6e48b', '#7bc96f', '#239a3b', '#196127'].reverse()}
             data={heatmap_data}
             dayLabelWidth={20}
             emptyColor={'#ecedf0'}
@@ -128,7 +128,7 @@
                         allowOverflow={true}
                         cellGap={5}
                         cellRadius={1}
-                        colors={['#a1dab4', '#42b6c4', '#2c7fb9', '#263494']}
+                        colors={['#c6e48b', '#7bc96f', '#239a3b', '#196127'].reverse()}
                         data={heatmap_data}
                         dayLabelWidth={20}
                         emptyColor={'#ecedf0'}
