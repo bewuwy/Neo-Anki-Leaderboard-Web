@@ -3,7 +3,7 @@ import { PUBLIC_PB_URL } from '$env/static/public';
 
 
 /** @type {import('./$types').PageLoad} */
-export async function load() { // { params }: any
+export async function load() {
     const pb = new PocketBase(PUBLIC_PB_URL);
 
     const loggedIn = pb.authStore.isValid;
