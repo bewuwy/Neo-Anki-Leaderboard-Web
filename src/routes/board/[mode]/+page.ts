@@ -15,12 +15,12 @@ export async function load({params}: any) {
     let collection = '';   
 
     const date_start_week = new Date();
-    date_start_week.setDate(date_start_week.getDate() - date_start_week.getDay());
-    date_start_week.setHours(0, 0, 0, 0);
+    date_start_week.setDate(date_start_week.getDate() - (date_start_week.getDay() + 6) % 7);
+    // date_start_week.setHours(0, 0, 0, 0);
     
     const date_start_month = new Date();
     date_start_month.setDate(1);
-    date_start_month.setHours(0, 0, 0, 0);
+    // date_start_month.setHours(0, 0, 0, 0);
 
     switch (lb_mode) {
         case 'today':
