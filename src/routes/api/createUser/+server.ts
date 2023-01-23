@@ -22,14 +22,12 @@ export async function POST({ request }: any) {
     const user_data_pb = await pb.collection("user_data").create({
         "user": user_id,
     });
-    console.log("user_data_pb", user_data_pb);
     
     // create in today_leaderboard
     const user_today_pb = await pb.collection("today_leaderboard").create({
         "user": user_id,
         "reviews": 0,
     });
-    console.log("user_today_pb", user_today_pb);
 
     // create in week_leaderboard
     const user_week_pb = await pb.collection("week_leaderboard").create({
