@@ -3,6 +3,8 @@
 <script>
     /** @type {import('./$types').PageData} */
     export let data;
+
+    import Board from '$lib/Board.svelte';
 </script>
 
 <hgroup>
@@ -31,24 +33,7 @@
 </hgroup>
 
 <!-- create table from leaderboad -->
-<table role="grid">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Reviews</th>
-        </tr>
-    </thead>
-    <tbody>
-        {#each data.leaderboard as record, i}
-            <tr>
-                <td>{#if record.username === data.user?.username}<b>{i+1}.</b>{:else}{i+1}.{/if}</td>
-                <td>{#if record.username === data.user?.username}<b><u><a style="color: hsl(205deg, 16%, 77%);" href={ "/user/" + record.user_id }>{record.username}</a></u></b>{:else}<a style="color: hsl(205deg, 16%, 77%);" href={ "/user/" + record.user_id }>{record.username}</a>{/if}</td>
-                <td>{#if record.username === data.user?.username}<b>{record.score}</b>{:else}{record.score}{/if}</td>
-            </tr>
-        {/each}
-    </tbody>
-</table>
+<Board sort={data.sort} records={data.records} user={data.user} />
 
 <footer class="grid">
     <a href="https://github.com/bewuwy" target="_blank" rel="noopener noreferrer" role="button" class="outline secondary">Made by bewu</a>

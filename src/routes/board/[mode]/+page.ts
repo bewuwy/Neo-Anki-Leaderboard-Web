@@ -4,8 +4,21 @@ import { redirect } from '@sveltejs/kit';
 
 
 /** @type {import('./$types').PageLoad} */
-export async function load({params}: any) {
+export async function load({params, url}: any) {
     const lb_mode = params.mode;
+    let sort = url.searchParams.get('sort') || 'r';
+
+    switch (sort) {
+        case 'r':
+            sort = '-reviews';
+            break;
+        case 't':
+            sort = '-time';
+            break;
+        default:
+            sort = '-reviews';
+            break;
+    }
     
     const pb = new PocketBase(PUBLIC_PB_URL);
 
@@ -41,36 +54,18 @@ export async function load({params}: any) {
     }
 
     const records = await pb.collection(collection).getFullList(200 /* batch size */, {
-        sort: '-reviews',
+        sort,
         filter: filter,
         expand: 'user'
     });
 
-    const leaderboard = [];
-
-    let user: any;
-
-    for (let i = 0; i < records.length; i++) {
-        const record = records[i];
-        user = record.expand.user;
-        const username = user.username;
-        const user_id = user.id;
-
-        const score = record.reviews || 0;
-
-        leaderboard.push({
-            username,
-            user_id,
-            score,
-        });
-    }
-
-    user = pb.authStore.model || null;
+    const user: any = pb.authStore.model || null;
 
     return {
-      leaderboard,
+      records,
       user,
       loggedIn,
-      lb_mode 
+      lb_mode,
+      "sort": sort[1]
     };
 }
