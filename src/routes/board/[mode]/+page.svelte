@@ -15,17 +15,17 @@
             <details role="list" dir="rtl">
               <summary aria-haspopup="listbox" role="link">{data.lb_mode.charAt(0).toUpperCase() + data.lb_mode.slice(1) }</summary>
               <ul role="listbox">
-                <li><a href="/">Today</a></li>
+                <li><a href="/board/today">Today</a></li>
                 <li><a href="/board/week">Week</a></li>
                 <li><a href="/board/month">Month</a></li>
-                <li><a href="/board/all">All time</a></li>
+                <!-- <li><a href="/board/all">All time</a></li> -->
               </ul>
             </details>
           </li>
         </ul>
         <ul>
             <li><a href='/login' role="button" class="outline">{ data.loggedIn? "Logout": "Login" }</a></li>
-            <li><a href={ "/" + data.loggedIn? "profile": "register" } role="button" class="outline">{ data.loggedIn? "Profile": "Register" }</a></li>
+            <li><a href={ data.loggedIn? "/profile": "/register" } role="button" class="outline">{ data.loggedIn? "Profile": "Register" }</a></li>
         </ul>
     </nav>
 </hgroup>
@@ -42,7 +42,7 @@
     <tbody>
         {#each data.leaderboard as record, i}
             <tr>
-                <td>{#if record.username === data.user?.username}<b>{i+1}.</b>{:else}{i+1}{/if}</td>
+                <td>{#if record.username === data.user?.username}<b>{i+1}.</b>{:else}{i+1}.{/if}</td>
                 <td>{#if record.username === data.user?.username}<b><u><a style="color: hsl(205deg, 16%, 77%);" href={ "/user/" + record.user_id }>{record.username}</a></u></b>{:else}<a style="color: hsl(205deg, 16%, 77%);" href={ "/user/" + record.user_id }>{record.username}</a>{/if}</td>
                 <td>{#if record.username === data.user?.username}<b>{record.score}</b>{:else}{record.score}{/if}</td>
             </tr>

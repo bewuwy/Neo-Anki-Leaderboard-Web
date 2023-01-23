@@ -6,7 +6,7 @@
     import Nav from '$lib/Nav.svelte';
 
     /**
-	 * @type {{ valid: any; }}
+	 * @type {{ valid: boolean; reason: String; }}
 	 */
     export let form;
 
@@ -29,6 +29,10 @@
 	 * @param {Event} event
 	 */
     async function handleRegister(event) {
+        form = {
+            valid: true,
+            reason: ""
+        };
 
         // @ts-ignore
         const data = new FormData(this);
@@ -57,9 +61,29 @@
         } catch (ClientResponseError) {
             // console.log("e", e);
             console.log("Error creating user in PocketBase");
+            
+            // @ts-ignore
+            const error_data = ClientResponseError.data;
+
+            let reason = "Unknown error";
+
+            if (error_data.data.username) {
+                reason = error_data.data.username.message;
+            }
+            if (error_data.data.email) {
+                reason = error_data.data.email.message;
+            }
+            if (error_data.data.password) {
+                reason = error_data.data.password.message;
+            }
+
+            console.log(error_data);
+
+            // console.log(ClientResponseError);
 
             return form = {
-                valid: false
+                valid: false,
+                reason
             };
         }
 
@@ -103,11 +127,14 @@
 
     <label for="password">
     Password
-    <input type="password" id="password" name="password" placeholder="Password" aria-invalid={ form?.valid === false || undefined } required>
+    <input type="password" id="password" name="password" placeholder="Password" minlength="8" aria-invalid={ form?.valid === false || undefined } required>
     </label>
 
     {#if form?.valid === false}
-        <h6 style="color: #e53935;">Couldn't create your account!</h6>
+        <hgroup>
+            <h6 style="color: #e53935;">Couldn't create your account!</h6>
+            <h6>{form.reason}</h6>
+        </hgroup>
     {/if}
 
     {#if success}
