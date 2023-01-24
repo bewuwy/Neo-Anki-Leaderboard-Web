@@ -32,4 +32,4 @@
     </nav>
 </hgroup>
 
-<Board sort={data.sort} records={data.records} user={data.user} />
+<Board sort={data.sort} records={data.records} />

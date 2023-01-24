@@ -2,7 +2,12 @@
     export let sort: string;
     export let records: any;
     $: records, updateLeaderboard();
-    export let user: any;
+
+    import Pocketbase from 'pocketbase';
+    import { PUBLIC_PB_URL } from '$env/static/public';
+
+    const pb = new Pocketbase(PUBLIC_PB_URL);
+    const user = pb.authStore.model;
 
     let leaderboard: any[] = [];
 
@@ -11,9 +16,8 @@
 
         for (let i = 0; i < records.length; i++) {
             const record = records[i];
-            user = record.expand.user;
-            const username = user.username;
-            const user_id = user.id;
+            const username = record.expand.user.username;
+            const user_id = record.expand.user.id;
     
             const score = record.reviews || 0;
             let minutes = record.time || 0;
@@ -28,24 +32,36 @@
             });
         }
     }
+
+    console.log(user);
 </script>
+
+<style>
+    .highlight td {
+        font-weight: bold;
+    }
+
+    .highlight a {
+        text-decoration: underline;
+    }
+</style>
 
 <table role="grid">
     <thead>
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th><a href="?sort=r">Reviews</a> {#if sort === 'r'}↓{/if}</th>
-            <th><a href="?sort=t">Minutes</a> {#if sort === 't'}↓{/if}</th>
+            <th><a href="?sort=r">Reviews {#if sort === 'r'}↓{/if}</a></th>
+            <th><a href="?sort=t">Minutes {#if sort === 't'}↓{/if}</a></th>
         </tr>
     </thead>
     <tbody>
         {#each leaderboard as record, i}
-            <tr>
-                <td>{#if record.username === user?.username}<b>{i+1}.</b>{:else}{i+1}.{/if}</td>
-                <td>{#if record.username === user?.username}<b><u><a style="color: hsl(205deg, 16%, 77%);" href={ "/user/" + record.user_id }>{record.username}</a></u></b>{:else}<a style="color: hsl(205deg, 16%, 77%);" href={ "/user/" + record.user_id }>{record.username}</a>{/if}</td>
-                <td>{#if record.username === user?.username}<b>{record.score}</b>{:else}{record.score}{/if}</td>
-                <td>{#if record.username === user?.username}<b>{record.minutes}</b>{:else}{record.minutes}{/if}</td>
+            <tr data-user-id="{ record.user_id }" class:highlight={user != null && user?.id && record.user_id == user?.id} >
+                <td>{i+1}.</td>
+                <td><a style="color: hsl(205deg, 16%, 77%);" href={ "/user/" + record.user_id }>{record.username}</a></td>
+                <td>{record.score}</td>
+                <td>{record.minutes}</td>
             </tr>
         {/each}
     </tbody>
