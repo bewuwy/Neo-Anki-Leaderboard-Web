@@ -16,8 +16,10 @@
             const user_id = user.id;
     
             const score = record.reviews || 0;
-            const minutes = record.time || 0;
+            let minutes = record.time || 0;
     
+            minutes = Math.round(minutes * 10) / 10;
+
             leaderboard.push({
                 username,
                 user_id,
