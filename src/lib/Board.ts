@@ -1,4 +1,6 @@
 import { redirect } from "@sveltejs/kit";
+import Pocketbase from 'pocketbase';
+import { PUBLIC_PB_URL } from '$env/static/public';
 
 export function getLBRecordsRequest(lb_mode: string, urlSearchParams: URLSearchParams) {
     let filter;
@@ -71,4 +73,15 @@ export function getLBRecordsRequest(lb_mode: string, urlSearchParams: URLSearchP
         collection,
         sort
     };
+}
+
+export function getLBRecords(collection: string, filter: string, sort: string) {
+
+    const pb = new Pocketbase(PUBLIC_PB_URL);
+
+    return pb.collection(collection).getFullList(200 /* batch size */, {
+        sort,
+        filter,
+        expand: 'user'
+    });
 }

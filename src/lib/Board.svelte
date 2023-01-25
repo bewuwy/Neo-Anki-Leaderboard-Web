@@ -33,6 +33,17 @@
         }
     }
 
+    async function changeLBSort(event: Event) {
+        const target = event.target as HTMLAnchorElement;    
+        const sort_ = target.id.slice(2);
+
+        // update url search params
+        const url = new URL(window.location.href);
+        url.searchParams.set('sort', sort_);
+
+        window.location.href = url.href;
+        // window.history.replaceState({}, "", url.href);
+    }
 </script>
 
 <style>
@@ -50,8 +61,8 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th><a href="?sort=r">Reviews {#if sort === 'r'}↓{/if}</a></th>
-            <th><a href="?sort=t">Minutes {#if sort === 't'}↓{/if}</a></th>
+            <th><a id="s-r" on:click={changeLBSort}>Reviews {#if sort === 'r'}↓{/if}</a></th>
+            <th><a id="s-t" on:click={changeLBSort}>Minutes {#if sort === 't'}↓{/if}</a></th>
         </tr>
     </thead>
     <tbody>
