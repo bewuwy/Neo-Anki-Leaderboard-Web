@@ -33,4 +33,4 @@
 </hgroup>
 
 <!-- create table from leaderboad -->
-<Board sort={data.sort} records={data.records} />
+<Board sort={data.sort} records={data.records} lb_mode={"day"} />

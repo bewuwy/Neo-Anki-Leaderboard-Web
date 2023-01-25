@@ -75,7 +75,7 @@ export function getLBRecordsRequest(lb_mode: string, urlSearchParams: URLSearchP
     };
 }
 
-export function getLBRecords(collection: string, filter: string, sort: string) {
+export function getLBRecords({collection, filter, sort}: {collection: string, filter: string, sort: string}) {
 
     const pb = new Pocketbase(PUBLIC_PB_URL);
 

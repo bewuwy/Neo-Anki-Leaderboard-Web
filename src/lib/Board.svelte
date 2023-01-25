@@ -2,9 +2,11 @@
     export let sort: string;
     export let records: any;
     $: records, updateLeaderboard();
+    export let lb_mode: string;
 
     import Pocketbase from 'pocketbase';
     import { PUBLIC_PB_URL } from '$env/static/public';
+	import { getLBRecords, getLBRecordsRequest } from './Board';
 
     const pb = new Pocketbase(PUBLIC_PB_URL);
     const user = pb.authStore.model;
@@ -35,14 +37,19 @@
 
     async function changeLBSort(event: Event) {
         const target = event.target as HTMLAnchorElement;    
-        const sort_ = target.id.slice(2);
+        sort = target.id.slice(2);
 
         // update url search params
         const url = new URL(window.location.href);
-        url.searchParams.set('sort', sort_);
+        url.searchParams.set('sort', sort);
 
-        window.location.href = url.href;
-        // window.history.replaceState({}, "", url.href);
+        // window.location.href = url.href;
+        window.history.replaceState({}, "", url.href);
+
+        // update leaderboard
+        getLBRecords(getLBRecordsRequest(lb_mode, url.searchParams)).then((records_) => {
+            records = records_;
+        })
     }
 </script>
 

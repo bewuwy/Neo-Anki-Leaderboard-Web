@@ -57,4 +57,4 @@
     </nav>
 </hgroup>
 
-<Board sort={data.sort} records={data.records} />
+<Board sort={data.sort} records={data.records} lb_mode={data.lb_mode} />
