@@ -52,8 +52,6 @@ export function getLBRecordsRequest(lb_mode: string, urlSearchParams: URLSearchP
             filter += ")";
     }
 
-    // console.log(filter);
-
     //* sort
     let sort = urlSearchParams.get('sort') || 'r';
     switch (sort) {

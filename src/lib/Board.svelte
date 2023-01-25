@@ -33,7 +33,6 @@
         }
     }
 
-    console.log(user);
 </script>
 
 <style>

@@ -46,7 +46,6 @@
             // @ts-ignore
             await pb.collection("users").authWithPassword(username, password);
         } catch (ClientResponseError) {
-            // console.log("e", e);
             console.log("Error logging in");
 
             success = false;

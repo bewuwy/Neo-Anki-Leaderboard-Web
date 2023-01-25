@@ -59,7 +59,6 @@
             // create user in PocketBase
             user_pb = await pb.collection("users").create(user_data);
         } catch (ClientResponseError) {
-            // console.log("e", e);
             console.log("Error creating user in PocketBase");
             
             // @ts-ignore
@@ -78,8 +77,6 @@
             }
 
             console.log(error_data);
-
-            // console.log(ClientResponseError);
 
             return form = {
                 valid: false,

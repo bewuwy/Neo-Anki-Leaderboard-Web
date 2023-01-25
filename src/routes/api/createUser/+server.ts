@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit';
 import PocketBase from 'pocketbase';
 import { PUBLIC_PB_URL } from '$env/static/public'
-import { PB_ADMIN_USER, PB_ADMIN_PASSWORD } from '$env/static/private';
+// import { PB_ADMIN_USER, PB_ADMIN_PASSWORD } from '$env/static/private';
 
  
 /** @type {import('./$types').RequestHandler} */
@@ -16,7 +16,7 @@ export async function POST({ request }: any) {
     // console.log(PB_ADMIN_USER, PB_ADMIN_PASSWORD);
     // console.log(pb.authStore.isValid);
 
-    console.log("user_id", user_id);
+    console.log("createUser: user_id", user_id);
 
     // create user_data
     const user_data_pb = await pb.collection("user_data").create({
