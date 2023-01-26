@@ -1,10 +1,9 @@
 import PocketBase from 'pocketbase';
 import { PUBLIC_PB_URL } from '$env/static/public';
-// import { redirect } from '@sveltejs/kit';
 import { getLBRecordsRequest } from '$lib/Board';
 
 
-/** @type {import('./$types').PageLoad} */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function load({params, url}: any) {
     const lb_mode = params.mode;
     
@@ -19,6 +18,7 @@ export async function load({params, url}: any) {
         expand: 'user'
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const user: any = pb.authStore.model || null;
 
     return {

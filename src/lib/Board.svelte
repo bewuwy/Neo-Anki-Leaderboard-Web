@@ -47,6 +47,13 @@
         window.history.replaceState({}, "", url.href);
 
         // update leaderboard
+        refresh();
+    }
+
+    // TODO: trigger leaderboard update on url change
+    function refresh() {
+        const url = new URL(window.location.href);
+
         getLBRecords(getLBRecordsRequest(lb_mode, url.searchParams)).then((records_) => {
             records = records_;
         })
@@ -61,6 +68,11 @@
     .highlight a {
         text-decoration: underline;
     }
+
+    .sort-picked::after {
+        margin-left: 5px;
+        content: "↓";
+    }
 </style>
 
 <table role="grid">
@@ -68,8 +80,8 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th><a id="s-r" on:click={changeLBSort}>Reviews {#if sort === 'r'}↓{/if}</a></th>
-            <th><a id="s-t" on:click={changeLBSort}>Minutes {#if sort === 't'}↓{/if}</a></th>
+            <th><a id="s-r" on:click={changeLBSort} class:sort-picked={sort === 'r'}>Reviews</a></th>
+            <th><a id="s-t" on:click={changeLBSort} class:sort-picked={sort === 't'}>Minutes</a></th>
         </tr>
     </thead>
     <tbody>
