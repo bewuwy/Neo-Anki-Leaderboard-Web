@@ -47,6 +47,13 @@
         window.history.replaceState({}, "", url.href);
 
         // update leaderboard
+        refresh();
+    }
+
+    // TODO: trigger leaderboard update on url change
+    function refresh() {
+        const url = new URL(window.location.href);
+
         getLBRecords(getLBRecordsRequest(lb_mode, url.searchParams)).then((records_) => {
             records = records_;
         })
