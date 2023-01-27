@@ -25,8 +25,8 @@
           break;
       }
 
-      const old_url = window.location.href;
-      const new_url = old_url.replace(/\/board\/\w+/, new_path);
+      const old_url = new URL(window.location.href);
+      const new_url = old_url.origin + new_path + old_url.search;
 
       // // history replace with new url
       // window.history.pushState({}, "", new_url);
