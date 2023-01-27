@@ -1,22 +1,14 @@
-<script>
+<script lang="ts">
     import PocketBase from 'pocketbase';
     import { PUBLIC_PB_URL } from '$env/static/public';
-
-    // @ts-ignore
     import Nav from '$lib/Nav.svelte';
 
-    /**
-	 * @type {{ valid: boolean; reason: String; }}
-	 */
-    export let form;
+    export let form: { valid: boolean; reason: String; };
 
     // /** @type {import('./$types').PageData} */
     // export let data;
 
-    /**
-	 * @type {boolean}
-	 */
-    let success;
+    let success: boolean;
     $: {
         if (success) {
             setTimeout(() => {
@@ -25,10 +17,7 @@
         }
     }
 
-    /**
-	 * @param {Event} event
-	 */
-    async function handleRegister(event) {
+    async function handleRegister(event: Event) {
         form = {
             valid: true,
             reason: ""
@@ -37,8 +26,8 @@
         // @ts-ignore
         const data = new FormData(this);
         const username = data.get('username');
-        const email = data.get('email');
-        const password = data.get('password');
+        const email = data.get('email')?.toString() || "";
+        const password = data.get('password')?.toString() || "";
 
         const pb = new PocketBase(PUBLIC_PB_URL);
 
@@ -84,8 +73,11 @@
             };
         }
 
-        // @ts-ignore
+        // login user in PocketBase
         pb.collection("users").authWithPassword(email, password);
+
+        // send confirmation email
+        await pb.collection("users").requestVerification(email);
 
         // POST /api/CreateUser
         const res = await fetch('/api/createUser', {
