@@ -75,23 +75,25 @@
     }
 </style>
 
-<table role="grid">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th><a id="s-r" on:click={changeLBSort} class:sort-picked={sort === 'r'}>Reviews</a></th>
-            <th><a id="s-t" on:click={changeLBSort} class:sort-picked={sort === 't'}>Minutes</a></th>
-        </tr>
-    </thead>
-    <tbody>
-        {#each leaderboard as record, i}
-            <tr data-user-id="{ record.user_id }" class:highlight={user != null && user?.id && record.user_id == user?.id} >
-                <td>{i+1}.</td>
-                <td><a style="color: hsl(205deg, 16%, 77%);" href={ "/user/" + record.user_id }>{record.username}</a></td>
-                <td>{record.score}</td>
-                <td>{record.minutes}</td>
+<figure>
+    <table role="grid">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th><a id="s-r" on:click={changeLBSort} class:sort-picked={sort === 'r'}>Reviews</a></th>
+                <th><a id="s-t" on:click={changeLBSort} class:sort-picked={sort === 't'}>Minutes</a></th>
             </tr>
-        {/each}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {#each leaderboard as record, i}
+                <tr data-user-id="{ record.user_id }" class:highlight={user != null && user?.id && record.user_id == user?.id} >
+                    <td>{i+1}.</td>
+                    <td><a style="color: hsl(205deg, 16%, 77%);" href={ "/user/" + record.user_id }>{record.username}</a></td>
+                    <td>{record.score}</td>
+                    <td>{record.minutes}</td>
+                </tr>
+            {/each}
+        </tbody>
+    </table>
+</figure>
