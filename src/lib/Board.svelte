@@ -25,7 +25,7 @@
     }
 
     updateTimer();
-    setTimeout(updateTimer, 10*10e3);
+    setTimeout(updateTimer, 60*10e3);
 
     import Pocketbase from 'pocketbase';
     import { PUBLIC_PB_URL } from '$env/static/public';
@@ -98,7 +98,7 @@
     }
 </style>
 
-<p title={"Resets at " + end_time.toLocaleString() + " in your timezone."}>Resets { time_left }</p>
+<small data-tooltip={"Resets at " + end_time.toLocaleString() + " in your timezone."}>Resets { time_left }</small>
 
 <figure>
     <table role="grid">
