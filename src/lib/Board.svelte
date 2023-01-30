@@ -4,6 +4,29 @@
     $: records, updateLeaderboard();
     export let lb_mode: string;
 
+    //* time_left
+    import { getEndTime } from './Board';
+    const end_time = getEndTime(lb_mode);
+
+    let time_left: string = '';
+    const rtf1 = new Intl.RelativeTimeFormat(undefined, { numeric: 'auto' });
+    
+    function updateTimer() {
+        let hours_left = (end_time.getTime() - Date.now())/1000/60/60;
+        hours_left = Math.round(hours_left * 10) / 10;
+
+        if (hours_left <= 1) {
+            time_left = rtf1.format(hours_left/60, 'minute');
+        } else if (hours_left <= 24) {
+            time_left = rtf1.format(hours_left, 'hour');
+        } else {
+            time_left = rtf1.format(Math.round(hours_left/24), 'day');
+        }
+    }
+
+    updateTimer();
+    setTimeout(updateTimer, 10*10e3);
+
     import Pocketbase from 'pocketbase';
     import { PUBLIC_PB_URL } from '$env/static/public';
 	import { getLBRecords, getLBRecordsRequest } from './Board';
@@ -74,6 +97,8 @@
         content: "↓";
     }
 </style>
+
+<p title={"Resets at " + end_time.toLocaleString() + " in your timezone."}>Resets { time_left }</p>
 
 <figure>
     <table role="grid">

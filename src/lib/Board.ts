@@ -85,3 +85,24 @@ export function getLBRecords({collection, filter, sort}: {collection: string, fi
         expand: 'user'
     });
 }
+
+export function getEndTime(lb_mode: string) {
+    const end_time: Date = new Date();
+
+    switch (lb_mode) {
+        case 'today':
+            end_time.setUTCHours(23, 59, 59, 999);
+            break;
+        case 'week':
+            end_time.setDate(end_time.getDate() + (7 - end_time.getDay()) % 7);
+            end_time.setUTCHours(23, 59, 59, 999);
+            break;
+        case 'month':
+            end_time.setUTCDate(1);
+            end_time.setUTCMonth(end_time.getUTCMonth() + 1);
+            end_time.setUTCHours(23, 59, 59, 999);
+            break;
+    }
+
+    return end_time;
+}
