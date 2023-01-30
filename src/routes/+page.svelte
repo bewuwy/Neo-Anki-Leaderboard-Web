@@ -11,4 +11,4 @@
 <NavBoard loggedIn={data.loggedIn} lb_mode={"today"} />
 
 <!-- create table from leaderboad -->
-<Board sort={data.sort} records={data.records} lb_mode={"day"} />
+<Board sort={data.sort} records={data.records} lb_mode={"today"} />
