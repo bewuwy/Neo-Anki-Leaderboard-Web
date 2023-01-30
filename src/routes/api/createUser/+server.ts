@@ -22,31 +22,10 @@ export async function POST({ request }: any) {
     const user_data_pb = await pb.collection("user_data").create({
         "user": user_id,
     });
-    
-    // create in today_leaderboard
-    const user_today_pb = await pb.collection("today_leaderboard").create({
-        "user": user_id,
-        "reviews": 0,
-    });
-
-    // create in week_leaderboard
-    const user_week_pb = await pb.collection("week_leaderboard").create({
-        "user": user_id,
-        "reviews": 0,
-    });
-
-    // create in month_leaderboard
-    const user_month_pb = await pb.collection("month_leaderboard").create({
-        "user": user_id,
-        "reviews": 0,
-    });
 
     // update user with user_data and user_today
     await pb.collection("users").update(user_id, {
         "user_data": user_data_pb.id,
-        "user_today": user_today_pb.id,
-        "user_week": user_week_pb.id,
-        "user_month": user_month_pb.id,
     });
 
     return json({"success": true});
