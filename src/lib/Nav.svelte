@@ -8,9 +8,8 @@
 <title>{subtitle} | Neo Anki Leaderboard</title>
 
 <hgroup>
-    <a href="/">
-        <h1>Neo Anki Leaderboard</h1>
-    </a>
+    <h1><a href="/" class="contrast">Neo Anki Leaderboard</a></h1>    
+
     <nav>
         <ul>
           <li><strong>{ subtitle }</strong></li>
