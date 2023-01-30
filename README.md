@@ -1,38 +1,13 @@
-# create-svelte
+# Neo Anki Leaderboard Website
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This is the website for the Neo Anki Leaderboard. It is a simple website that displays the leaderboard synced from the Anki addon.
 
-## Creating a project
+Website: [neoankilb.vercel.app](https://neoankilb.vercel.app/)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Anki Addon
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+The Anki addon can be found here: [Github - NeoAnkiLeaderboard](https://github.com/bewuwy/Neo-Anki-Leaderboard)
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+## Contributing
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+If you want to contribute to this project, you can do so by forking the repository and making a pull request. If you want to add a feature, please open an issue first so we can discuss it.
