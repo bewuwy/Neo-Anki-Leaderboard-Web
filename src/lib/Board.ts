@@ -7,10 +7,10 @@ export function getLBRecordsRequest(lb_mode: string, urlSearchParams: URLSearchP
     let collection;
 
     const date_start_week = new Date();
-    date_start_week.setDate(date_start_week.getDate() - (date_start_week.getDay() + 6) % 7);
+    date_start_week.setUTCDate(date_start_week.getUTCDate() - (date_start_week.getUTCDay() + 6) % 7);
     
     const date_start_month = new Date();
-    date_start_month.setDate(1);
+    date_start_month.setUTCDate(1);
 
     switch (lb_mode) {
         case 'today':
@@ -76,7 +76,6 @@ export function getLBRecordsRequest(lb_mode: string, urlSearchParams: URLSearchP
 }
 
 export function getLBRecords({collection, filter, sort}: {collection: string, filter: string, sort: string}) {
-
     const pb = new Pocketbase(PUBLIC_PB_URL);
 
     return pb.collection(collection).getFullList(200 /* batch size */, {
