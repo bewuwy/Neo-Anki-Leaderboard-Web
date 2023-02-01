@@ -97,8 +97,8 @@ export function getEndTime(lb_mode: string) {
             end_time.setUTCHours(23, 59, 59, 999);
             break;
         case 'month':
-            end_time.setUTCDate(1);
-            end_time.setUTCMonth(end_time.getUTCMonth() + 1);
+            end_time.setUTCDate(0);
+            // end_time.setUTCMonth(end_time.getUTCMonth() + 1);
             end_time.setUTCHours(23, 59, 59, 999);
             break;
     }
