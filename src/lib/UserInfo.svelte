@@ -55,62 +55,35 @@
     }
 </style>
 
-<!-- user data -->
+<!-- user medals -->
 <article aria-busy={user?.username === undefined}>
-
-    {#if user?.username != undefined}
-
-        <h3>Medals</h3>
-        {#await medals_promise}
-            <p aria-busy="true">Loading medals...</p>
-        {:then medals}
-
-        <!-- weekly -->
-        {#if medals.week_medals.length > 0}
-            <h6>Weekly</h6>
-            <ul class="medals">
-                {#each medals.week_medals as medal}
-                    <li class={`${medal.type} ${medal.place}`}>{medal.date} for {medal.type}</li>
-                {/each}
-            </ul>
-        {/if}
-        
-        <!-- monthly -->
-        {#if medals.month_medals.length > 0}
-            <h6>Monthly</h6>
-            <ul class="medals">
-                {#each medals.month_medals as medal}
-                    <li class={`${medal.type} ${medal.place}`}>{medal.date} for {medal.type}</li>
-                {/each}
-            </ul>
-        {/if}
-
-        {#if medals.month_medals.length == 0 && medals.week_medals.length == 0}
-            <p>No medals yet</p>
-        {/if}
-        {/await}
-
-        <h3>User data</h3>
-        <ul>
-            {#if your}
-            <li>username: {user?.username}</li>
-            {/if}
-            <li>name: {user?.name}</li>
-            {#if your}
-            <li>e-mail: {user?.email}</li>
-            {/if}
+    <h3>{user?.username}'s medals</h3>
+    {#await medals_promise}
+        <p aria-busy="true">Loading medals...</p>
+    {:then medals}
+    <!-- weekly -->
+    {#if medals.week_medals.length > 0}
+        <h6>Weekly</h6>
+        <ul class="medals">
+            {#each medals.week_medals as medal}
+                <li class={`${medal.type} ${medal.place}`}>{medal.date} for {medal.type}</li>
+            {/each}
         </ul>
-        <details>
-            <summary>More info</summary>
-            <ul>
-                <li>account created: {createdDate}</li>
-                <li>user id: {user?.id}</li>
-                <li>verified e-mail: {user?.verified}</li>
-            </ul>
-        </details>
-    {:else}
-    Loading user data
     {/if}
+    
+    <!-- monthly -->
+    {#if medals.month_medals.length > 0}
+        <h6>Monthly</h6>
+        <ul class="medals">
+            {#each medals.month_medals as medal}
+                <li class={`${medal.type} ${medal.place}`}>{medal.date} for {medal.type}</li>
+            {/each}
+        </ul>
+    {/if}
+    {#if medals.month_medals.length == 0 && medals.week_medals.length == 0}
+        <p>No medals yet</p>
+    {/if}
+    {/await}
 </article>
 
 <!-- heatmap -->
@@ -188,5 +161,28 @@
             {/each}
     {:else}
     Loading heatmap data
+    {/if}
+</article>
+
+<!-- user data -->
+<article aria-busy={user?.username === undefined}>
+
+    {#if user?.username != undefined}
+        <h3>User data</h3>
+
+        <ul>
+            {#if your}
+            <li>username: {user?.username}</li>
+            {/if}
+            <li>name: {user?.name}</li>
+            {#if your}
+            <li>e-mail: {user?.email}</li>
+            {/if}
+            <li>account created: {createdDate}</li>
+            <li>user id: {user?.id}</li>
+            <li>verified e-mail: {user?.verified}</li>
+        </ul>
+    {:else}
+    Loading user data
     {/if}
 </article>
