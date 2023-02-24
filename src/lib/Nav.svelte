@@ -15,7 +15,7 @@
           <li><strong>{ subtitle }</strong></li>
         </ul>
         <ul>
-            <a href="/" role="button" class="outline">Leaderboard</a>
+            <a href="/board/week" role="button" class="outline">Leaderboard</a>
         </ul>
     </nav>
 </hgroup>

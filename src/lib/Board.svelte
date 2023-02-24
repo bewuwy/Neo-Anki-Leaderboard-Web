@@ -110,6 +110,13 @@
                 <th><a id="s-t" on:click={changeLBSort} class:sort-picked={sort === 't'}>Minutes</a></th>
             </tr>
         </thead>
+        {#if leaderboard.length == 0}
+        <tbody>
+            <tr>
+                <td colspan="4">No one competed yet in this leaderboard. You have a pretty good chance at taking the first place!</td>
+            </tr>
+        </tbody>
+        {:else}
         <tbody>
             {#each leaderboard as record, i}
                 <tr data-user-id="{ record.user_id }" class:highlight={user != null && user?.id && record.user_id == user?.id} >
@@ -120,5 +127,6 @@
                 </tr>
             {/each}
         </tbody>
+        {/if}
     </table>
 </figure>
