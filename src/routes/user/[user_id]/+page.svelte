@@ -7,10 +7,11 @@
     export let data: any;
     const user = data.user_info;
     const heatmap_data = data.heatmap_data;
+    const user_medals = data.user_medals;
 
     // console.log(data.user_info)
 </script>
 
 <Nav subtitle={data.user_info.name + "'s profile"} />
 
-<UserInfo {data} {user} {heatmap_data} your={false} />
+<UserInfo {data} {user} {heatmap_data} your={false} medals={user_medals} />

@@ -13,6 +13,14 @@ export async function load({ params }: any) {
 
     const user_data = await pb.collection('user_data').getOne(user_info.user_data);
 
+    console.log(`owner = "${user_id}"`);
+
+    const user_medals = await pb.collection('medals').getFullList(
+        undefined, {
+            "filter": `owner = "${user_id}"`
+        }
+    );
+    
     const reviews = user_data.reviews || {};
 
     interface HeatmapDay {
@@ -32,6 +40,7 @@ export async function load({ params }: any) {
     return {
         params,
         heatmap_data,
-        user_info
+        user_info,
+        user_medals
     }
 }

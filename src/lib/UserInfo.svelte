@@ -6,6 +6,7 @@
     export let user: any;
     export let heatmap_data: any;
     export let your: boolean = true;
+    export let medals: any;
 
     const createdDate = new Date(user?.created).toLocaleDateString();
 
@@ -45,8 +46,14 @@
 <article aria-busy={user?.username === undefined}>
 
     {#if user?.username != undefined}
+        <h3>Medals</h3>
+        <ul class="medals">
+            {#each medals as medal}
+                <li class={`${medal.type} ${medal.place}`}>{medal.month}</li>
+            {/each}
+        </ul>
+
         <h3>User data</h3>
-        
         <ul>
             {#if your}
             <li>username: {user?.username}</li>

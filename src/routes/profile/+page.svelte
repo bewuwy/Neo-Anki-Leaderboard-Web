@@ -19,4 +19,4 @@
 
 <Nav subtitle="Your profile" />
 
-<UserInfo {data} {user} {heatmap_data} />
+<UserInfo {data} {user} {heatmap_data} medals={ {} } />
