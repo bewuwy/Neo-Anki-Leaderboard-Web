@@ -6,7 +6,10 @@
     export let user: any;
     export let heatmap_data: any;
     export let your: boolean = true;
-    export let medals: any;
+
+    // get medals
+    import { getMedals } from '$lib/Medals';
+    let medals_promise = getMedals(user?.id);
 
     const createdDate = new Date(user?.created).toLocaleDateString();
 
@@ -40,18 +43,52 @@
             display: block;
         }
     }
+
+    .medals .gold::before {
+        content: "🥇";
+    }
+    .medals .silver::before {
+        content: "🥈";
+    }
+    .medals .bronze::before {
+        content: "🥉";
+    }
 </style>
 
 <!-- user data -->
 <article aria-busy={user?.username === undefined}>
 
     {#if user?.username != undefined}
+
         <h3>Medals</h3>
-        <ul class="medals">
-            {#each medals as medal}
-                <li class={`${medal.type} ${medal.place}`}>{medal.month}</li>
-            {/each}
-        </ul>
+        {#await medals_promise}
+            <p aria-busy="true">Loading medals...</p>
+        {:then medals}
+
+        <!-- weekly -->
+        {#if medals.week_medals.length > 0}
+            <h6>Weekly</h6>
+            <ul class="medals">
+                {#each medals.week_medals as medal}
+                    <li class={`${medal.type} ${medal.place}`}>{medal.date} for {medal.type}</li>
+                {/each}
+            </ul>
+        {/if}
+        
+        <!-- monthly -->
+        {#if medals.month_medals.length > 0}
+            <h6>Monthly</h6>
+            <ul class="medals">
+                {#each medals.month_medals as medal}
+                    <li class={`${medal.type} ${medal.place}`}>{medal.date} for {medal.type}</li>
+                {/each}
+            </ul>
+        {/if}
+
+        {#if medals.month_medals.length == 0 && medals.week_medals.length == 0}
+            <p>No medals yet</p>
+        {/if}
+        {/await}
 
         <h3>User data</h3>
         <ul>

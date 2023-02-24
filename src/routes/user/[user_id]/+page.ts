@@ -10,16 +10,7 @@ export async function load({ params }: any) {
     const pb = new PocketBase(PUBLIC_PB_URL);
 
     const user_info = await pb.collection('users').getOne(user_id);
-
     const user_data = await pb.collection('user_data').getOne(user_info.user_data);
-
-    console.log(`owner = "${user_id}"`);
-
-    const user_medals = await pb.collection('medals').getFullList(
-        undefined, {
-            "filter": `owner = "${user_id}"`
-        }
-    );
     
     const reviews = user_data.reviews || {};
 
@@ -41,6 +32,5 @@ export async function load({ params }: any) {
         params,
         heatmap_data,
         user_info,
-        user_medals
     }
 }
