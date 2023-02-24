@@ -36,7 +36,7 @@
 </script>
 
 <hgroup>
-    <h1>Neo Anki Leaderboard</h1>
+    <h1><a href="/" class="white">Neo Anki Leaderboard</a></h1>
     
     <nav>
         <ul>
