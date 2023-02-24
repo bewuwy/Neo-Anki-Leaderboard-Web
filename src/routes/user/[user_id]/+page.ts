@@ -10,9 +10,8 @@ export async function load({ params }: any) {
     const pb = new PocketBase(PUBLIC_PB_URL);
 
     const user_info = await pb.collection('users').getOne(user_id);
-
     const user_data = await pb.collection('user_data').getOne(user_info.user_data);
-
+    
     const reviews = user_data.reviews || {};
 
     interface HeatmapDay {
@@ -32,6 +31,6 @@ export async function load({ params }: any) {
     return {
         params,
         heatmap_data,
-        user_info
+        user_info,
     }
 }
