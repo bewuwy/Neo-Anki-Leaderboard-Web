@@ -55,7 +55,7 @@
         </ul>
         <ul>
             <li><a href='/login' role="button" class="outline">{ loggedIn? "Logout": "Login" }</a></li>
-            <li><a href={ loggedIn? "profile": "register" } role="button" class="outline">{ loggedIn? "Profile": "Register" }</a></li>
+            <li><a href={ loggedIn? "/profile": "/register" } role="button" class="outline">{ loggedIn? "Profile": "Register" }</a></li>
         </ul>
     </nav>
 </hgroup>

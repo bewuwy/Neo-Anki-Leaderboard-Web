@@ -27,7 +27,7 @@ export function getLBRecordsRequest(lb_mode: string, urlSearchParams: URLSearchP
             break;
         default:
             // redirect to /
-            throw redirect(302, '/');
+            throw redirect(302, '/board/week');
     }
 
     //*user filter
