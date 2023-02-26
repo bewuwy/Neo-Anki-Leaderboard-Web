@@ -21,4 +21,4 @@
 
 <Nav subtitle={data.user_info.name + "'s profile"} />
 
-<UserInfo {data} {user} {heatmap_data} your={false} />
+<UserInfo {user} {heatmap_data} your={false} />

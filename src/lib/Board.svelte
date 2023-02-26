@@ -59,6 +59,8 @@
     }
 
     async function changeLBSort(event: Event) {
+        event.preventDefault();
+
         const target = event.target as HTMLAnchorElement;    
         sort = target.id.slice(2);
 
@@ -106,8 +108,8 @@
             <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th><a id="s-r" on:click={changeLBSort} class:sort-picked={sort === 'r'}>Reviews</a></th>
-                <th><a id="s-t" on:click={changeLBSort} class:sort-picked={sort === 't'}>Minutes</a></th>
+                <th><a id="s-r" href={ "/board/" + lb_mode + '?sort=r' } on:click={changeLBSort} class:sort-picked={sort === 'r'}>Reviews</a></th>
+                <th><a id="s-t" href={ "/board/" + lb_mode + '?sort=t' } on:click={changeLBSort} class:sort-picked={sort === 't'}>Minutes</a></th>
             </tr>
         </thead>
         {#if leaderboard.length == 0}

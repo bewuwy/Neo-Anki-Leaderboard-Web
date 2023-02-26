@@ -2,7 +2,6 @@
     // @ts-ignore
     import SvelteHeatmap from 'svelte-heatmap';
 
-    export let data: any;
     export let user: any;
     export let heatmap_data: any;
     export let your: boolean = true;

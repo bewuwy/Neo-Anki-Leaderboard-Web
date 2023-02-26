@@ -26,4 +26,4 @@
 
 <Nav subtitle="Your profile" />
 
-<UserInfo {data} {user} {heatmap_data} />
+<UserInfo {user} {heatmap_data} />

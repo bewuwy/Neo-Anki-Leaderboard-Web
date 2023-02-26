@@ -72,6 +72,7 @@
 <form method="POST" on:submit|preventDefault={handleLogin}>
     <label for="username">
     Username
+    <!-- svelte-ignore a11y-autofocus -->
     <input type="text" id="username" name="username" placeholder="Username" aria-invalid={ form?.valid === false || undefined } required autofocus>
     </label>
 
