@@ -43,6 +43,11 @@
         }
     }
 
+    h1 > svg {
+        height: 1.5rem;
+        aspect-ratio: 1;
+    }
+
     .medals .gold::before {
         content: "🥇";
     }
@@ -54,9 +59,35 @@
     }
 </style>
 
+<!-- user name -->
+<hgroup>
+    {#if user}
+    <h1>
+        {user?.username}
+        {#if user?.verified}
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <title>User has verified their email address</title>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        {:else}
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <title>User hasn't verified their email address yet</title>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        {/if}
+    </h1>
+    <h3>account created: {createdDate}</h3>
+    {:else}
+    <h1>Loading...</h1>
+    <h3>Loading</h3>
+    {/if}
+</hgroup>
+
 <!-- user medals -->
-<article aria-busy={user?.username === undefined}>
-    <h3>{user?.username}'s medals</h3>
+<details open>
+    <!-- svelte-ignore a11y-no-redundant-roles -->
+    <summary role='button'>{ your? "Your": user.name + "'s" } medals</summary>
+
     {#await medals_promise}
         <p aria-busy="true">Loading medals...</p>
     {:then medals}
@@ -83,13 +114,14 @@
         <p>No medals yet</p>
     {/if}
     {/await}
-</article>
+</details>
 
 <!-- heatmap -->
-<article aria-busy={heatmap_data === undefined} id="heatmap-desktop">
+<details id="heatmap-desktop" open>
     
     {#if heatmap_data != undefined}
-        <h3>{ your? "Your": user.name + "'s" } review heatmap</h3>
+        <!-- svelte-ignore a11y-no-redundant-roles -->
+        <summary role='button'>{ your? "Your": user.name + "'s" } review heatmap</summary>
         
         <section>
             <SvelteHeatmap
@@ -127,15 +159,17 @@
             fontSize={16}
         />
     {:else}
-    Loading heatmap data
+        <!-- svelte-ignore a11y-no-redundant-roles -->
+        <summary role='button'>Review heatmap</summary>
+        <p aria-busy="true">Loading heatmap data</p>
     {/if}
-</article>
+</details>
 
 <!-- mobile heatmap -->
-<article aria-busy={heatmap_data === undefined} id="heatmap-mobile">
+<details id="heatmap-mobile" open>
 
     {#if heatmap_data != undefined}
-        <h3>{ your? "Your": user.name + "'s" } review heatmap</h3>
+        <summary>{ your? "Your": user.name + "'s" } review heatmap</summary>
         
             <!-- iterate from start_date every n months -->
             {#each Array.from({length: 4}, (_, i) => new Date(year_start.getFullYear(), year_start.getMonth() + i * 3)) as month}
@@ -159,24 +193,24 @@
                 </section>
             {/each}
     {:else}
-    Loading heatmap data
+        <!-- svelte-ignore a11y-no-redundant-roles -->
+        <summary role='button'>Review heatmap</summary>
+        <p aria-busy="true">Loading heatmap data</p>
     {/if}
-</article>
+</details>
 
+
+{#if your}
 <!-- user data -->
-<article aria-busy={user?.username === undefined}>
+<details>
+    <!-- svelte-ignore a11y-no-redundant-roles -->
+    <summary role='button'>User data</summary>
 
     {#if user?.username != undefined}
-        <h3>User data</h3>
-
         <ul>
-            {#if your}
             <li>username: {user?.username}</li>
-            {/if}
             <li>name: {user?.name}</li>
-            {#if your}
             <li>e-mail: {user?.email}</li>
-            {/if}
             <li>account created: {createdDate}</li>
             <li>user id: {user?.id}</li>
             <li>verified e-mail: {user?.verified}</li>
@@ -184,4 +218,5 @@
     {:else}
     Loading user data
     {/if}
-</article>
+</details>
+{/if}
