@@ -57,7 +57,15 @@
         success = true;
         return;
     }
+
+    import { MetaTags } from 'svelte-meta-tags';
 </script>
+
+<MetaTags
+    description="Login to Neo Anki Leaderboard"
+    title="Login"
+    titleTemplate="%s | Neo Anki Leaderboard"
+/>
 
 <Nav subtitle="Login" />
 

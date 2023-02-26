@@ -5,17 +5,15 @@
      export let subtitle;
 </script>
 
-<title>{subtitle} | Neo Anki Leaderboard</title>
-
 <hgroup>
     <h1><a href="/" class="contrast">Neo Anki Leaderboard</a></h1>    
 
     <nav>
         <ul>
-          <li><strong>{ subtitle }</strong></li>
+            <li><strong>{ subtitle }</strong></li>
         </ul>
         <ul>
-            <a href="/board/week" role="button" class="outline">Leaderboard</a>
+            <li><a href="/board/week" role="button" class="outline">Leaderboard</a></li>
         </ul>
     </nav>
 </hgroup>

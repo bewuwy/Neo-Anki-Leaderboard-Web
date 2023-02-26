@@ -4,9 +4,15 @@
 	import type { PageData } from './$types';
 
   export let data: PageData;
+
+  import { MetaTags } from 'svelte-meta-tags';
 </script>
 
-<title>{data.lb_mode.charAt(0).toUpperCase() + data.lb_mode.slice(1) } | Neo Anki Leaderboard</title>
+<MetaTags
+  description="See the Anki leaderboard for {data.lb_mode}"
+  title={data.lb_mode.charAt(0).toUpperCase() + data.lb_mode.slice(1)}
+  titleTemplate="%s | Neo Anki Leaderboard"
+/>
 
 <NavBoard loggedIn={data.loggedIn} lb_mode={data.lb_mode} />
 

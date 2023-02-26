@@ -100,7 +100,15 @@
         success = true;
         return;
     }
+
+    import { MetaTags } from 'svelte-meta-tags';
 </script>
+
+<MetaTags 
+    description="Register for Neo Anki Leaderboard" 
+    title="Register"
+    titleTemplate="%s | Neo Anki Leaderboard"
+/>
 
 <Nav subtitle="Register"/>
 

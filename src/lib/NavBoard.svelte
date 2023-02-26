@@ -44,10 +44,10 @@
           <li>
             <details role="list" dir="rtl">
               <summary aria-haspopup="listbox" role="link">{lb_title}</summary>
-              <ul role="listbox">
-                <li><a id="m-today" on:click={changeMode}>Today</a></li>
-                <li><a id="m-week" on:click={changeMode}>Week</a></li>
-                <li><a id="m-month" on:click={changeMode}>Month</a></li>
+              <ul role="listbox" aria-label="leaderboard_mode">
+                <li><a id="m-today" href="/board/today" on:click={changeMode}>Today</a></li>
+                <li><a id="m-week" href="/board/week" on:click={changeMode}>Week</a></li>
+                <li><a id="m-month" href="/board/month" on:click={changeMode}>Month</a></li>
                 <!-- <li><a href="/board/all">All time</a></li> -->
               </ul>
             </details>

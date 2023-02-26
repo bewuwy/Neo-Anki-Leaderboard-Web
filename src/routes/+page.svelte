@@ -2,7 +2,13 @@
 
 <script>
   import Nav from "$lib/Nav.svelte";
+  import { MetaTags } from 'svelte-meta-tags';
 </script>
+
+<MetaTags
+  description="With NeoAnkiLeaderboard Anki addon you can make even Anki a competition!"
+  title="Neo Anki Leaderboard"
+/>
 
 <Nav subtitle='"Make even Anki a competition"' />
 
