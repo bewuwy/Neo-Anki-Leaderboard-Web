@@ -169,7 +169,7 @@
 <details id="heatmap-mobile" open>
 
     {#if heatmap_data != undefined}
-        <summary>{ your? "Your": user.name + "'s" } review heatmap</summary>
+        <summary role="button">{ your? "Your": user.name + "'s" } review heatmap</summary>
         
             <!-- iterate from start_date every n months -->
             {#each Array.from({length: 4}, (_, i) => new Date(year_start.getFullYear(), year_start.getMonth() + i * 3)) as month}
