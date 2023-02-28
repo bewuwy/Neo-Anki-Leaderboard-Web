@@ -113,8 +113,13 @@
         align-self: end;
     }
 
-    .board-info button {
+    .board-info .buttons {
         margin-left: auto;
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .board-info > .buttons button, .board-info > .buttons a {
         margin-bottom: 0;
         padding: 0.5rem;
 
@@ -129,7 +134,11 @@
 
 <div class="board-info">
     <small data-tooltip={"Resets at " + end_time.toLocaleString() + " in your timezone."}>Resets { time_left }</small>
-    <button on:click={handleShare}>Share</button>
+
+    <div class="buttons">
+        <a role="button" href="/custom">Filter</a>
+        <button on:click={handleShare}>Share</button>
+    </div>
 </div>
 
 <figure>

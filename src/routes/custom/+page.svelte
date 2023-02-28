@@ -130,6 +130,7 @@
 
 <Nav subtitle={"Custom leaderboard"} />
 
+<a href="/board/week">← Back to leaderboard</a>
 <h3>Create a custom Anki leaderboard</h3>
 
 <h4>Search for users</h4>
