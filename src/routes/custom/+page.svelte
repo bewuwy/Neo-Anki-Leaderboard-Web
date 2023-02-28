@@ -4,7 +4,7 @@
     import Pocketbase from 'pocketbase';
     import { PUBLIC_PB_URL } from '$env/static/public';
     import { goto } from '$app/navigation';
-    import toast, { Toaster } from 'svelte-french-toast';
+    import toast from 'svelte-french-toast';
 
     type User = {
         id: string;
@@ -121,8 +121,6 @@
         grid-row: 2 / 3;
     }
 </style>
-
-<Toaster position="bottom-center" />
 
 <MetaTags
     description="Create a custom leaderboard with you and your friends"

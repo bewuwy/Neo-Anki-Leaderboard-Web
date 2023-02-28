@@ -1,4 +1,6 @@
 <script lang="ts">
+    import toast from 'svelte-french-toast';
+
     export let sort: string;
     export let records: any;
     $: records, updateLeaderboard();
@@ -83,6 +85,14 @@
             records = records_;
         })
     }
+
+    function handleShare() {
+        const url = new URL(window.location.href);
+        url.searchParams.set('sort', sort);
+
+        navigator.clipboard.writeText(url.href);
+        toast.success('Copied leaderboard link to clipboard!');
+    }
 </script>
 
 <style>
@@ -94,13 +104,33 @@
         text-decoration: underline;
     }
 
+    .board-info {
+        display: flex;
+    }
+
+    .board-info small {
+        height: min-content;
+        align-self: end;
+    }
+
+    .board-info button {
+        margin-left: auto;
+        margin-bottom: 0;
+        padding: 0.5rem;
+
+        width: min-content;
+    }
+
     .sort-picked::after {
         margin-left: 5px;
         content: "↓";
     }
 </style>
 
-<small data-tooltip={"Resets at " + end_time.toLocaleString() + " in your timezone."}>Resets { time_left }</small>
+<div class="board-info">
+    <small data-tooltip={"Resets at " + end_time.toLocaleString() + " in your timezone."}>Resets { time_left }</small>
+    <button on:click={handleShare}>Share</button>
+</div>
 
 <figure>
     <table role="grid">
