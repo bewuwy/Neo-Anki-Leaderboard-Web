@@ -14,6 +14,7 @@ specifiers:
   prettier-plugin-svelte: ^2.9.0
   svelte: ^3.55.1
   svelte-check: ^3.0.4
+  svelte-french-toast: ^1.0.3
   svelte-heatmap: ^1.0.2
   svelte-meta-tags: ^2.6.5
   tslib: ^2.5.0
@@ -23,6 +24,7 @@ specifiers:
 dependencies:
   '@picocss/pico': 1.5.7
   pocketbase: 0.11.1
+  svelte-french-toast: 1.0.3_svelte@3.55.1
   svelte-heatmap: 1.0.2
 
 devDependencies:
@@ -1582,6 +1584,14 @@ packages:
       - sugarss
     dev: true
 
+  /svelte-french-toast/1.0.3_svelte@3.55.1:
+    resolution: {integrity: sha512-HBdutlqUx5FroucvcmMJstmTJDedXayiOSXubBYW6iL5x1PdHp+bOflGx5NxsOa6+EQckJnnVv1vJYgGsg7ngQ==}
+    dependencies:
+      svelte-writable-derived: 2.1.6_svelte@3.55.1
+    transitivePeerDependencies:
+      - svelte
+    dev: false
+
   /svelte-heatmap/1.0.2:
     resolution: {integrity: sha512-qVsJj/Y/FQCjYJ2A7QU/v87FjGFjWqrTIb+qPumrudzH5w6D5WoubHF7Q2g38naJry4ADO1I0K29UuC86t5lJw==}
     dev: false
@@ -1654,10 +1664,17 @@ packages:
       typescript: 4.9.5
     dev: true
 
+  /svelte-writable-derived/2.1.6_svelte@3.55.1:
+    resolution: {integrity: sha512-vqOXuiESMZyP/kt/RD+nOk2RVHNakDm1K1hmfeGAKc4jzcSp5hEkUi43MDbkVlMurkSBlcMVTQwRQy4LcBT2lw==}
+    peerDependencies:
+      svelte: ^3.2.1
+    dependencies:
+      svelte: 3.55.1
+    dev: false
+
   /svelte/3.55.1:
     resolution: {integrity: sha512-S+87/P0Ve67HxKkEV23iCdAh/SX1xiSfjF1HOglno/YTbSTW7RniICMCofWGdJJbdjw3S+0PfFb1JtGfTXE0oQ==}
     engines: {node: '>= 8'}
-    dev: true
 
   /text-table/0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
