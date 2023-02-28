@@ -40,7 +40,6 @@
 
     <nav>
         <ul>
-          <li><strong>Leaderboard</strong></li>
           <li>
             <details role="list" dir="rtl">
               <summary aria-haspopup="listbox" role="link">{lb_title}</summary>
