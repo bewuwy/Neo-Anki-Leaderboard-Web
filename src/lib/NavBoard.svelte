@@ -35,11 +35,24 @@
     }
 </script>
 
+<style>
+  nav .subtitle {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    nav .subtitle {
+      display: inline-block;
+    }
+  }
+</style>
+
 <hgroup>
     <h1><a href="/" class="contrast">Neo Anki Leaderboard</a></h1>    
 
     <nav>
         <ul>
+          <li class="subtitle"><strong>Leaderboard</strong></li>
           <li>
             <details role="list" dir="rtl">
               <summary aria-haspopup="listbox" role="link">{lb_title}</summary>
