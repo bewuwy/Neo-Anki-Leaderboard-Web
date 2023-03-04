@@ -79,24 +79,6 @@
         // send confirmation email
         await pb.collection("users").requestVerification(email);
 
-        // POST /api/CreateUser
-        const res = await fetch('/api/createUser', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "user_pb_id": user_pb.id
-            })
-        });
-
-        if (!res.ok) {
-            console.log("Error creating user in Neo Anki");
-            
-            success = false;
-            return;
-        }
-
         success = true;
         return;
     }
