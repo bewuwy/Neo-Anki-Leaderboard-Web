@@ -26,6 +26,6 @@ export async function load({params, url}: any) {
       user,
       loggedIn,
       lb_mode,
-      "sort": sort[1]
+      "sort": sort.slice(1),
     };
 }

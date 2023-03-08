@@ -48,14 +48,15 @@
     
             const score = record.reviews || 0;
             let minutes = record.time || 0;
-    
             minutes = Math.round(minutes * 10) / 10;
+            const xp = record.xp || 0;
 
             leaderboard.push({
                 username,
                 user_id,
                 score,
-                minutes
+                minutes,
+                xp
             });
         }
     }
@@ -147,8 +148,9 @@
             <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th><a id="s-r" href={ "/board/" + lb_mode + '?sort=r' } on:click={changeLBSort} class:sort-picked={sort === 'r'}>Reviews</a></th>
-                <th><a id="s-t" href={ "/board/" + lb_mode + '?sort=t' } on:click={changeLBSort} class:sort-picked={sort === 't'}>Minutes</a></th>
+                <th><a id="s-reviews" href={ "/board/" + lb_mode + '?sort=reviews' } on:click={changeLBSort} class:sort-picked={sort === 'reviews'}>Reviews</a></th>
+                <th><a id="s-xp" href={ "/board/" + lb_mode + '?sort=xp' } on:click={changeLBSort} class:sort-picked={sort === 'xp'}>XP</a></th>
+                <th><a id="s-time" href={ "/board/" + lb_mode + '?sort=time' } on:click={changeLBSort} class:sort-picked={sort === 'time'}>Minutes</a></th>
             </tr>
         </thead>
         {#if leaderboard.length == 0}
@@ -164,6 +166,7 @@
                     <td>{i+1}.</td>
                     <td><a style="color: hsl(205deg, 16%, 77%);" href={ "/user/" + record.user_id }>{record.username}</a></td>
                     <td>{record.score}</td>
+                    <td>{record.xp}</td>
                     <td>{record.minutes}</td>
                 </tr>
             {/each}

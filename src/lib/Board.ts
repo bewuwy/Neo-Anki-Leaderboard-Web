@@ -55,17 +55,9 @@ export function getLBRecordsRequest(lb_mode: string, urlSearchParams: URLSearchP
     }
 
     //* sort
-    let sort = urlSearchParams.get('sort') || 'r';
-    switch (sort) {
-        case 'r':
-            sort = '-reviews';
-            break;
-        case 't':
-            sort = '-time';
-            break;
-        default:
-            sort = '-reviews';
-            break;
+    let sort = '-' + (urlSearchParams.get('sort') || 'reviews');
+    if ([ '-reviews', '-time', '-xp' ].indexOf(sort) === -1) {
+        sort = '-reviews';
     }
 
     return {
