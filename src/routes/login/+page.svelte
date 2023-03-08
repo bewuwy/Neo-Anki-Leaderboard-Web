@@ -1,23 +1,18 @@
-<script>
+<script lang="ts">
     import PocketBase, { ClientResponseError } from 'pocketbase';
     import { PUBLIC_PB_URL } from '$env/static/public';
 
-    // @ts-ignore
+    import toast from "svelte-french-toast";
+
     import Nav from '$lib/Nav.svelte';
 
-    /**
-	 * @type {{ valid: any; }}
-	 */
-    export let form;
+    export let form: { valid: any; };
 
-    /**
-	 * @type {boolean}
-	 */
-    let success;
+    let success: boolean;
     $: {
         if (success) {
             setTimeout(() => {
-                window.location.href = "/";
+                window.location.href = "/profile";
             }, 1000);
         }
     }
@@ -28,14 +23,13 @@
     if (pb.authStore.isValid) {
         pb.authStore.clear();
 
-        // redirect to home
-        window.location.href = "/";
+        toast.success("Logged out successfully");
+
+        // // redirect to home
+        // window.location.href = "/";
     }
 
-    /**
-	 * @param {Event} event
-	 */
-    async function handleLogin(event) {
+    async function handleLogin(event: Event) {
 
         // @ts-ignore
         const data = new FormData(this);
@@ -49,12 +43,14 @@
             console.log("Error logging in");
 
             success = false;
+            toast.error("Invalid username or password");
             return form = {
                 valid: false
             };
         }
 
         success = true;
+        toast.success("Logged in successfully");
         return;
     }
 
@@ -80,14 +76,6 @@
     Password
     <input type="password" id="password" name="password" placeholder="Password" aria-invalid={ form?.valid === false || undefined } required>
     </label>
-
-    {#if form?.valid === false}
-        <h6 style="color: #e53935;">Invalid user or password!</h6>
-    {/if}
-
-    {#if success}
-        <h6 style="color: #43a047;">Logged in successfully!</h6>
-    {/if}
     
     <button type="submit">Log in</button>
 </form>

@@ -2,17 +2,15 @@
     import PocketBase from 'pocketbase';
     import { PUBLIC_PB_URL } from '$env/static/public';
     import Nav from '$lib/Nav.svelte';
+    import toast from "svelte-french-toast";
 
     export let form: { valid: boolean; reason: String; };
-
-    // /** @type {import('./$types').PageData} */
-    // export let data;
 
     let success: boolean;
     $: {
         if (success) {
             setTimeout(() => {
-                window.location.href = "/";
+                window.location.href = "/profile";
             }, 1000);
         }
     }
@@ -33,17 +31,18 @@
 
         let user_pb;
 
+        const user_data = {
+            username,
+            email,
+            "emailVisibility": false,
+            password,
+            "passwordConfirm": password,
+            "name": username,
+            "user_data": "",
+            "user_today": ""
+        };
+        
         try {
-            const user_data = {
-                username,
-                email,
-                "emailVisibility": false,
-                password,
-                "passwordConfirm": password,
-                "name": username,
-                "user_data": "",
-                "user_today": ""
-            };
 
             // create user in PocketBase
             user_pb = await pb.collection("users").create(user_data);
@@ -67,6 +66,7 @@
 
             console.log(error_data);
 
+            toast.error(reason);
             return form = {
                 valid: false,
                 reason
@@ -80,6 +80,7 @@
         await pb.collection("users").requestVerification(email);
 
         success = true;
+        toast.success("Registered successfully");
         return;
     }
 
@@ -108,17 +109,6 @@
     Password
     <input type="password" id="password" name="password" placeholder="Password" minlength="8" aria-invalid={ form?.valid === false || undefined } required>
     </label>
-
-    {#if form?.valid === false}
-        <hgroup>
-            <h6 style="color: #e53935;">Couldn't create your account!</h6>
-            <h6>{form.reason}</h6>
-        </hgroup>
-    {/if}
-
-    {#if success}
-        <h6 style="color: #43a047;">Account created successfully!</h6>
-    {/if}
     
     <button type="submit">Register</button>
 </form>
