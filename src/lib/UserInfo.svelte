@@ -47,7 +47,13 @@
         delAccountModal = !delAccountModal;
     }
 
+    let deleteConfirmText = '';
     function handleDeleteAccount(event: Event) {
+
+        if (deleteConfirmText != 'delete') {
+            toast.error('Please type "delete" in the box to confirm');
+            return;
+        }
 
         pb.collection('users').delete(user?.id).then(() => {
             toast.success('Account deleted!');
@@ -278,9 +284,9 @@
         <dialog open={delAccountModal}>
             <article>
               <h3>Confirm your action!</h3>
-              <p>
-                Are you sure you want to delete your account? This action is irreversible.
-              </p>
+              <p>Are you sure you want to delete your account? This action is irreversible.</p>
+              <p>Type 'delete' to confirm</p>
+              <input type="text" bind:value={ deleteConfirmText }>
               <footer class="buttons-inline">
                 <button class="secondary" on:click={toggleDeleteAccountModal}>Cancel</button>
                 <button on:click={handleDeleteAccount}>Confirm</button>
