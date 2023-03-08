@@ -1,6 +1,9 @@
 <script lang="ts">
     // @ts-ignore
     import SvelteHeatmap from 'svelte-heatmap';
+    import Pocketbase from 'pocketbase';
+    import { PUBLIC_PB_URL } from '$env/static/public';
+    import toast from 'svelte-french-toast';
 
     export let user: any;
     export let heatmap_data: any;
@@ -27,6 +30,35 @@
     const half_year_start = new Date();
     half_year_start.setMonth(6);
     half_year_start.setDate(1);
+
+    const pb = new Pocketbase(PUBLIC_PB_URL);
+
+    function handleVerifyEmail(event: Event) {
+
+        pb.collection('users').requestVerification(user?.email).then(() => {
+            toast.success('Verification email sent!');
+        }).catch((err: any) => {
+            toast.error(err.message);
+        });
+    }
+
+    let delAccountModal = false;
+    function toggleDeleteAccountModal(event: Event) {
+        delAccountModal = !delAccountModal;
+    }
+
+    function handleDeleteAccount(event: Event) {
+
+        pb.collection('users').delete(user?.id).then(() => {
+            toast.success('Account deleted!');
+
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1000);
+        }).catch((err: any) => {
+            toast.error(err.message);
+        });
+    }
 </script>
 
 <style>
@@ -57,29 +89,39 @@
     .medals .bronze::before {
         content: "🥉";
     }
+
+    #actions {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .buttons-inline > button {
+        width: fit-content;
+        display: inline;
+    }
 </style>
 
 <!-- user name -->
 <hgroup>
     {#if user}
-    <h1>
-        {user?.username}
-        {#if user?.verified}
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <title>User has verified their email address</title>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <!-- {:else}
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <title>User hasn't verified their email address yet</title>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg> -->
-        {/if}
-    </h1>
-    <h3>account created: {createdDate}</h3>
+        <h1>
+            {user?.username}
+            {#if user?.verified}
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <title>User has verified their email address</title>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {:else if your}
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <title>User hasn't verified their email address yet</title>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            {/if}
+        </h1>
+        <h3>account created: {createdDate}</h3>
     {:else}
-    <h1>Loading...</h1>
-    <h3>Loading</h3>
+        <h1>Loading...</h1>
+        <h3>Loading</h3>
     {/if}
 </hgroup>
 
@@ -199,24 +241,51 @@
     {/if}
 </details>
 
-
 {#if your}
-<!-- user data -->
-<details>
-    <!-- svelte-ignore a11y-no-redundant-roles -->
-    <summary role='button'>User data</summary>
+    <!-- user data -->
+    <details>
+        <!-- svelte-ignore a11y-no-redundant-roles -->
+        <summary role='button'>User data</summary>
 
-    {#if user?.username != undefined}
-        <ul>
-            <li>username: {user?.username}</li>
-            <li>name: {user?.name}</li>
-            <li>e-mail: {user?.email}</li>
-            <li>account created: {createdDate}</li>
-            <li>user id: {user?.id}</li>
-            <li>verified e-mail: {user?.verified}</li>
-        </ul>
-    {:else}
-    Loading user data
-    {/if}
-</details>
+        {#if user?.username != undefined}
+            <ul>
+                <li>username: {user?.username}</li>
+                <li>name: {user?.name}</li>
+                <li>e-mail: {user?.email}</li>
+                <li>account created: {createdDate}</li>
+                <li>user id: {user?.id}</li>
+                <li>verified e-mail: {user?.verified}</li>
+            </ul>
+        {:else}
+        Loading user data
+        {/if}
+    </details>
+
+    <!-- actions -->
+    <article id="actions" class="buttons-inline">
+        <h2>Account actions</h2>
+
+        {#if !user?.verified && your}
+            <button class="outline" on:click={handleVerifyEmail}>
+                Verify email
+            </button>
+        {/if}
+
+        <button class="secondary" on:click={toggleDeleteAccountModal}>
+            Delete account
+        </button>
+
+        <dialog open={delAccountModal}>
+            <article>
+              <h3>Confirm your action!</h3>
+              <p>
+                Are you sure you want to delete your account? This action is irreversible.
+              </p>
+              <footer class="buttons-inline">
+                <button class="secondary" on:click={toggleDeleteAccountModal}>Cancel</button>
+                <button on:click={handleDeleteAccount}>Confirm</button>
+              </footer>
+            </article>
+          </dialog>
+    </article>
 {/if}
