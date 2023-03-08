@@ -95,7 +95,11 @@
 
 <Nav subtitle="Register"/>
 
+<p>Already have an account? <a href="/login">Login here</a></p>
+
 <form method="POST" on:submit|preventDefault={handleRegister}>
+    <h2 style="margin: 0">Register</h2>
+
     <label for="username">
     Username
     <input type="text" id="username" name="username" placeholder="Username" aria-invalid={ form?.valid === false || undefined } required>

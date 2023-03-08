@@ -65,17 +65,23 @@
 
 <Nav subtitle="Login" />
 
+<p>No account yet? <a href="/register">Register here</a></p>
+
 <form method="POST" on:submit|preventDefault={handleLogin}>
+    <h2 style="margin: 0">Log in</h2>
+
     <label for="username">
     Username
+    </label>
     <!-- svelte-ignore a11y-autofocus -->
     <input type="text" id="username" name="username" placeholder="Username" aria-invalid={ form?.valid === false || undefined } required autofocus>
-    </label>
 
     <label for="password">
     Password
-    <input type="password" id="password" name="password" placeholder="Password" aria-invalid={ form?.valid === false || undefined } required>
     </label>
+    <input type="password" id="password" name="password" placeholder="Password" aria-invalid={ form?.valid === false || undefined } required>
+
+    <a href="/login/forgot" class="contrast">Forgot password?</a>
     
     <button type="submit">Log in</button>
 </form>
